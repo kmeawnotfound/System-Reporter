@@ -1,0 +1,27 @@
+# Build output
+/SystemReport.exe
+/SystemReport.pdb
+/SystemReport.xml
+/artifacts/
+/obj/
+/bin/
+/TestResults/
+
+# Generated reports
+System_Report_*.txt
+System_Report_*.json
+system-report.json
+system-report.txt
+
+# Editor and OS files
+.vs/
+.vscode/
+*.user
+*.suo
+*.swp
+Thumbs.db
+desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp

@@ -1,0 +1,35 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Build
+        shell: cmd
+        run: Build.bat -q
+
+      - name: Smoke tests
+        shell: powershell
+        run: .\test.ps1
+
+      - name: Package
+        shell: powershell
+        run: .\build.ps1 -Package -Quiet
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: SystemReport-package
+          path: artifacts/*
+          if-no-files-found: error

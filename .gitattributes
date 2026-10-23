@@ -1,0 +1,24 @@
+# Normalize text files in the repository.
+* text=auto
+
+# Windows source and scripts keep CRLF so batch files behave predictably.
+*.cs text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Documentation and configuration use LF.
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+.editorconfig text eol=lf
+
+# Binary artifacts should never be normalized.
+*.exe binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.ico binary
