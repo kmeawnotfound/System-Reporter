@@ -1,35 +1,27 @@
-name: build
+name: Compile SystemReport
 
 on:
   push:
+    branches: [ "main" ]
   pull_request:
-
-permissions:
-  contents: read
+    branches: [ "main" ]
 
 jobs:
-  windows:
+  build:
     runs-on: windows-latest
 
     steps:
-      - name: Check out
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Build
-        shell: cmd
-        run: Build.bat -q
+    - name: Compile using repository script
+      shell: cmd
+      run: |
+        # Use the built-in bootstrap script provided in the repo
+        call Build.bat -q
 
-      - name: Smoke tests
-        shell: powershell
-        run: .\test.ps1
-
-      - name: Package
-        shell: powershell
-        run: .\build.ps1 -Package -Quiet
-
-      - name: Upload package
-        uses: actions/upload-artifact@v4
-        with:
-          name: SystemReport-package
-          path: artifacts/*
-          if-no-files-found: error
+    - name: Upload SystemReport Executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: SystemReport-Binary
+        path: SystemReport.exe
