@@ -1,0 +1,27 @@
+name: Compile SystemReport
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Compile using repository script
+      shell: cmd
+      run: |
+        # Use the built-in bootstrap script provided in the repo
+        call Build.bat -q
+
+    - name: Upload SystemReport Executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: SystemReport-Binary
+        path: SystemReport.exe
